@@ -10,18 +10,11 @@ function App() {
   );
 
   const handleSuccess = async (googleData: any) => {
-    console.log(googleData);
-    const res = await fetch('/api/google-auth', {
-      method: 'POST',
-      body: JSON.stringify({
-        token: googleData.tokenId,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const data = await res.json();
+    const data = {
+      name: googleData.profileObj.name,
+      email: googleData.profileObj.email,
+      picture: googleData.profileObj.imageUrl
+    }
     setLoginData(data);
     localStorage.setItem('loginData', JSON.stringify(data));
   }
